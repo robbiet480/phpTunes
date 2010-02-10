@@ -7,24 +7,6 @@ if(!file_exists($DirectoryToScan))
 mkdir($DirectoryToScan); 
 } 
 
-?>
-<html>
-<head>
-<title>myTunes</title>
-<LINK href="css/style.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="js/ajax.js"></script>
-</head>
-<body>
-<div id="container">
-<div class="top">
-<h3>myTunes</h3>
-</div>
-<div class="sidebar">
-side            
-</div>
-<div id="listing">
-
-<?php
 require_once('includes/getid3/getid3.php');
 
 // Initialize getID3 engine
@@ -42,17 +24,34 @@ while (($file = readdir($dir)) !== false) {
 
 		// output desired information in whatever format you want
 		$filename = str_replace(" ", "%20", $ThisFileInfo['filename']);
-		$link = "play.php?file=" . $DirectoryToScan . "/" . $filename;
+		$link = "play.php?name=" . (!empty($ThisFileInfo['comments_html']['title']) ? implode('<BR>', $ThisFileInfo['comments_html']['title']) : '&nbsp;') . "&file=" . $DirectoryToScan . "/" . $filename;
 		$text = (!empty($ThisFileInfo['comments_html']['title']) ? implode('<BR>', $ThisFileInfo['comments_html']['title']) : '&nbsp;') . " - " . (!empty($ThisFileInfo['comments_html']['artist']) ? implode('<BR>', $ThisFileInfo['comments_html']['artist']) : '&nbsp;');
-		?>
-		<a href="#" onclick="getdata('<?php echo $link; ?>','top');">
-		<?php
-		echo $text . "</a><br>
-";
+	echo $link;
 	}
 }
 
 ?>
+<html>
+<head>
+<title>myTunes</title>
+<LINK href="css/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/ajax.js"></script>
+<script type="text/javascript" src="js/jquery-1.4.1.min.js"></script> 
+
+</head>
+<body>
+<div id="container">
+<div class="top">
+<h3>myTunes</h3>
+
+
+</div>
+<div class="sidebar">
+side            
+</div>
+<div id="listing">
+
+<a href="#" onclick="getdata('<?php echo $link; ?>','top');"><?php echo $text . "</a><br>"; ?>
 
 </div>
 
