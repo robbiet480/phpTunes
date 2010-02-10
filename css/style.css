@@ -1,0 +1,29 @@
+body {
+margin: 0;
+padding: 0;
+}
+
+#container {
+width: auto;
+height: auto;
+}
+
+.top {
+position: relative;
+padding-bottom: 5%;
+border-bottom: 1px black solid;
+}
+
+.listing {
+text-align: left;
+}
+
+
+.sidebar {
+position: relative;
+width: 10%;
+padding-right: 10%;
+height: 100%;
+border-right: 1px black solid;
+}
+
